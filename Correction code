@@ -1,0 +1,13 @@
+def multi_error_correc(data,error_array): #This function takes in a list of known anomaly values
+    for error in error_array:
+        anomaly_correction(data,error)
+    return data
+    
+def anomaly_correction(data,point): #errors are correcting by taking an average of the 4 adjacent intensity values and replacing the error.
+    for j,row in enumerate(data):
+        for i,col in enumerate(row):
+            if col == point:
+                averaged=(row[i-1]+row[i+1]+data[j-1][i] + data[j+1][i])/4
+                row[i]=averaged
+
+#Note: this code breaks down for anomaly values on the boundary of the intensity array. When this occurs, the values need to be averaged manually.
